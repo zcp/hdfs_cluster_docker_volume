@@ -1,0 +1,19 @@
+
+1. docker cp FileSystemOperations.java hadoop-master:/$HADOOP_CLASSPATH/ 
+2. cd $HADOOP_CLASSPATH/ 
+3. javac -cp /usr/local/hadoop-2.7.4/share/hadoop/common/hadoop-common-2.7.4.jar FileSystemOperations.java 
+# namenode should be formated and dfs service should be started first.
+4. hadoop FileSystemOperations add source_file dest_path
+#  stop datanode
+5. docker stop hadoop-slave1
+   docker stop hadoop-slave2
+   docker stop hadoop-slave3
+#  start datanode
+6. docker start hadoop-slave1
+   docker start hadoop-slave2
+   docker start hadoop-slave3
+#  restart dfs service, 
+7. stop-dfs.sh
+   start-dfs.sh
+8. hadood fs -cat dest_path/filename
+   if the content of filename is shown correctly, then hdfs cluste run normally.
